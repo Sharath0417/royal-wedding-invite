@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Royal Union | Sandeep & Anusha • Akshay & Preeti</title>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&family=Libre+Baskerville&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --maroon: #5A0F1A;
+            --gold: #C9A24D;
+            --ivory: #F8F3EC;
+            --glass: rgba(255, 255, 255, 0.05);
+            --gold-border: rgba(201, 162, 77, 0.4);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Libre Baskerville', serif;
+            background-color: var(--maroon);
+            color: var(--ivory);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200%;
+            }
+
+            100% {
+                background-position: 200%;
+            }
+        }
+
+        @keyframes softPulse {
+            0% {
+                box-shadow: 0 0 15px rgba(201, 162, 77, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 25px rgba(201, 162, 77, 0.5);
+            }
+
+            100% {
+                box-shadow: 0 0 15px rgba(201, 162, 77, 0.2);
+            }
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1,
+        h2,
+        h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            margin: 0;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .names {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--ivory);
+            margin: 20px 0;
+            background: linear-gradient(90deg, var(--ivory), #fff, var(--gold), #fff, var(--ivory));
+            background-size: 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 6s infinite linear;
+        }
+
+        .subtitle {
+            font-style: italic;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        /* --- LAYOUT --- */
+        section {
+            padding: 100px 20px;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero {
+            min-height: 90vh;
+            background: radial-gradient(circle at center, #7a1523 0%, var(--maroon) 70%);
+        }
+
+        .divider {
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 40px auto;
+        }
+
+        /* --- CARDS --- */
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            padding: 50px;
+            border: 1px solid var(--gold-border);
+            border-radius: 12px;
+            max-width: 800px;
+            width: 90%;
+            margin: 20px auto;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--gold);
+        }
+
+        /* --- INVITE IMAGE SPECIFIC --- */
+        .invite-container {
+            position: relative;
+            margin-top: 40px;
+            padding: 10px;
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            display: inline-block;
+            animation: softPulse 4s infinite ease-in-out;
+        }
+
+        .invite-img {
+            max-width: 100%;
+            width: 600px;
+            border-radius: 4px;
+            display: block;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* --- INTERSECTION OBSERVER ANIMATIONS --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.4s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.6s;
+        }
+
+        footer {
+            padding: 50px;
+            font-size: 0.9em;
+            opacity: 0.7;
+            border-top: 1px solid var(--gold-border);
+        }
+
+        /* --- KANNADA & MUSIC STYLES --- */
+        .kannada-text-container {
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--gold-border);
+            border-radius: 8px;
+            text-align: center;
+            color: var(--ivory);
+        }
+
+        .kannada-title {
+            font-size: 2em;
+            color: var(--gold);
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .kannada-details {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .couple-block {
+            margin: 15px 0;
+            font-size: 1.3em;
+        }
+
+        .couple-block span {
+            display: inline-block;
+            margin: 0 5px;
+        }
+
+        .weds {
+            font-size: 0.8em;
+            opacity: 0.7;
+            font-family: 'Great Vibes', cursive;
+        }
+
+        /* --- BUTTONS & FINAL NOTE --- */
+        .map-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .map-btn:hover {
+            background: var(--gold);
+            color: var(--maroon);
+            box-shadow: 0 0 15px var(--gold-border);
+            transform: translateY(-2px);
+        }
+
+        .final-note-section {
+            padding-bottom: 80px;
+        }
+
+        .glow-box {
+            border: 1px solid var(--gold);
+            padding: 60px 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(201, 162, 77, 0.1), transparent 70%);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .invite-msg {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4em;
+            line-height: 1.6;
+            color: var(--ivory);
+            font-style: italic;
+        }
+
+        .sign-off {
+            font-size: 1.1em;
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+
+        .family-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5em;
+            color: var(--gold);
+            margin-top: 10px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="reveal">
+            <h1>A Royal Union</h1>
+            <p class="subtitle">Witness the merging of families, hearts, and destinies.</p>
+        </div>
+
+        <div class="divider reveal delay-1"></div>
+
+        <div class="reveal delay-2">
+            <div class="names">Sandeep & Anusha</div>
+            <div class="names">Akshay & Preeti</div>
+        </div>
+
+        <p class="reveal delay-3" style="font-size: 1.2rem; margin-top: 20px;">
+            05 February 2026
+        </p>
+    </section>
+
+    <!-- TRADITIONAL INVITE SECTION (ADDED) -->
+    <section id="invite">
+        <div class="reveal">
+            <h2>The Traditional Invitation</h2>
+            <p class="subtitle">With the blessings of our ancestors</p>
+
+            <div class="invite-container">
+                <!-- Using the path where we copied the image -->
+                <img src="./assets/kannada_invite.jpg" alt="Kannada Wedding Invitation" class="invite-img">
+            </div>
+
+            <!-- KANNADA TEXT TRANSCRIPTION -->
+            <div class="kannada-text-container reveal delay-1">
+                <h3>ಶ್ರೀ ಆದಿಶಕ್ತಿ ಪ್ರಸನ್ನ | ಶ್ರೀ ಸೋಗಲ ಸೋಮಲಿಂಗೇಶ್ವರ ಪ್ರಸನ್ನ</h3>
+
+                <div class="kannada-title">ಮದುವೆಯ ಮಮತೆಯ ಕರೆಯೋಲೆ</div>
+
+                <p class="kannada-details">
+                    <strong>ವಿವಾಹ ಮಹೂರ್ತ:</strong> ದಿನಾಂಕ: 05-02-2026 ಗುರುವಾರ ಮಧ್ಯಾಹ್ನ 12-36 ಕ್ಕೆ<br>
+                    <strong>ವಿವಾಹ ಸ್ಥಳ:</strong> ಶ್ರೀ ಹೇಮರಡ್ಡಿ ಮಲ್ಲಮ್ಮ ಸಮುದಾಯ ಭವನ, ಬದಾಮಿ
+                </p>
+
+                <div class="kannada-couples">
+                    <div class="couple-block">
+                        <span class="groom">ಚ. ಸಂ. ಸಂದೀಪ್</span>
+                        <span class="weds">ಮಾತೃಶ್ರೀ</span>
+                        <span class="bride">ಚ. ಕು. ಸೌ. ಅನುಷಾ</span>
+                    </div>
+                    <div class="couple-block">
+                        <span class="groom">ಚ. ಅಕ್ಷಯ್</span>
+                        <span class="weds">ಮಾತೃಶ್ರೀ</span>
+                        <span class="bride">ಚ. ಕು. ಸೌ. ಪ್ರೀತಿ</span>
+                    </div>
+                </div>
+
+                <p class="kannada-footer">
+                    ತಮ್ಮ ಆಗಮನಾಭಿಲಾಷಿಗಳು:<br>
+                    ಪಾಟೀಲ ಪರಿವಾರ ಮತ್ತು ಬಂಧು-ಮಿತ್ರರು
+                </p>
+
+                <div class="welcome-note" style="margin-top: 25px; font-style: italic; color: var(--gold);">
+                    "Your presence is our joy. Please accept this as our personal invitation."<br>
+                    "ತಮ್ಮ ಉಪಸ್ಥಿತಿಯೇ ನಮಗೆ ಸಂಭ್ರಮ. ದಯವಿಟ್ಟು ಬನ್ನಿ, ಹರಸಿ."
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- THE STORIES -->
+    <section>
+        <div class="reveal">
+            <h2>The Sacred Unions</h2>
+        </div>
+
+        <div class="card reveal delay-1">
+            <h3 style="color: var(--ivory);">Engineer × Engineer</h3>
+            <p style="margin-top: 15px; font-style: italic;">Sandeep & Anusha</p>
+            <div class="divider" style="width: 50px; margin: 20px auto;"></div>
+            <p>
+                Built on shared logic, innovation, and growth.<br>
+                A life debugged together is a life well lived.
+            </p>
+        </div>
+
+        <div class="card reveal delay-2">
+            <h3 style="color: var(--ivory);">Lawyer × Engineer</h3>
+            <p style="margin-top: 15px; font-style: italic;">Akshay & Preeti</p>
+            <div class="divider" style="width: 50px; margin: 20px auto;"></div>
+            <p>
+                Where wisdom meets structure.<br>
+                The perfect balance of argument and design.
+            </p>
+        </div>
+    </section>
+
+    <!-- DETAILS -->
+    <section>
+        <div class="reveal">
+            <h2>Ceremony Details</h2>
+        </div>
+
+        <div class="card reveal delay-1">
+            <h3 style="margin-bottom: 20px;">Muhurtham</h3>
+            <p style="font-size: 1.2rem; line-height: 1.8;">
+                <strong>Date:</strong> Thursday, 05 February 2026<br>
+                <strong>Time:</strong> 12:36 PM (Abhijit Lagnam)<br>
+                <strong>Venue:</strong> Sri Hemaraddi Mallamma Samudhaya Bhavana,<br>
+                Badami, Bagalkot District
+            </p>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=Sri+Hemaraddi+Mallamma+Samudhaya+Bhavana+Badami"
+                target="_blank" class="map-btn">
+                📍 View Location on Map
+            </a>
+        </div>
+    </section>
+
+    <!-- FUTURE GLIMPSE -->
+    <section>
+        <div class="reveal">
+            <h2>A Glimpse Into the Future</h2>
+
+            <div class="card" style="border-color: rgba(255,255,255,0.1);">
+                <p><strong>Engineer Household:</strong><br> Smart Home Level: 100% | Bugs: 0%</p>
+                <div class="divider" style="margin: 20px auto; opacity: 0.5;"></div>
+                <p><strong>Lawyer-Engineer Household:</strong><br> Contracts Signed: Daily | Next Vacation: Negotiated
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL FAMILY NOTE (HIGHLIGHTED) -->
+    <section class="final-note-section">
+        <div class="reveal">
+            <div class="glow-box">
+                <h2>Heartfelt Gratitude</h2>
+                <p class="invite-msg">
+                    "Celebrations become memories only when shared with loved ones.<br>
+                    Your presence is the greatest gift you can give us."
+                </p>
+
+                <div class="divider" style="width: 80px; margin: 30px auto; background: var(--gold);"></div>
+
+                <p class="sign-off">
+                    With Love & Regards,<br>
+                    <span class="family-name">The Patil Family</span><br>
+                    & Relatives
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="reveal">
+            <p>© 2026 • Patil Family • A Digital Legacy</p>
+            <p style="font-size: 0.8em; margin-top: 10px;">Designed with ❤️ & AI</p>
+        </div>
+    </footer>
+
+    <script>
+        // Advanced Reveal on Scroll
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: "0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+    </script>
+
+</body>
+
+</html>
